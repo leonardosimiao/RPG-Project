@@ -7,10 +7,11 @@ public class Mover : MonoBehaviour
 {
     [SerializeField] Transform target;
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        // Will be true while left mouse button is pressed down.
+        if (Input.GetMouseButton(0))
         {
             MoveToCursor();
         }
@@ -19,13 +20,13 @@ public class Mover : MonoBehaviour
 
     private void MoveToCursor()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
+        Ray rayToMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit click;
+        bool hasClicked = Physics.Raycast(rayToMouse, out click);
 
-        if (hasHit)
+        if (hasClicked)
         {
-            GetComponent<NavMeshAgent>().destination = hit.point;
+            GetComponent<NavMeshAgent>().destination = click.point;
         }
     }
 
