@@ -1,31 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using RPG.Movement;
 
-public class PlayerController : MonoBehaviour
+namespace RPG.Control 
 {
-    [SerializeField] Transform target;
-
-    // Update is called once per frame.
-    void Update()
+    public class PlayerController : MonoBehaviour
     {
-        // Will be true while left mouse button is pressed down.
-        if (Input.GetMouseButton(0))
+        // Update is called once per frame.
+        void Update()
         {
-            MoveToCursor();
+            // Will be true while left mouse button is pressed down.
+            if (Input.GetMouseButton(0))
+            {
+                MoveToCursor();
+            }
         }
-    }
 
-    private void MoveToCursor()
-    {
-        Ray rayToMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit click;
-        bool hasClicked = Physics.Raycast(rayToMouse, out click);
-
-        if (hasClicked)
+        private void MoveToCursor()
         {
-            GetComponent<Mover>().MoveTo(click.point);
+            Ray rayToMouse = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit click;
+            bool hasClicked = Physics.Raycast(rayToMouse, out click);
+
+            if (hasClicked)
+            {
+                GetComponent<Mover>().MoveTo(click.point);
+            }
         }
     }
 }
