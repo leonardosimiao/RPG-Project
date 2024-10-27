@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] Transform target;
 
@@ -15,7 +15,6 @@ public class Mover : MonoBehaviour
         {
             MoveToCursor();
         }
-        UpdateAnimator();
     }
 
     private void MoveToCursor()
@@ -26,15 +25,7 @@ public class Mover : MonoBehaviour
 
         if (hasClicked)
         {
-            GetComponent<NavMeshAgent>().destination = click.point;
+            GetComponent<Mover>().MoveTo(click.point);
         }
-    }
-
-    private void UpdateAnimator()
-    {
-        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float speed = localVelocity.z;
-        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 }
