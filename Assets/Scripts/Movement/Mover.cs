@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Core;
 
 namespace RPG.Movement {
     public class Mover : MonoBehaviour
     {
         NavMeshAgent navMeshAgent;
 
+        // Start is called before the first frame update
         private void Start() 
         {
             navMeshAgent = GetComponent<NavMeshAgent>();    
@@ -14,6 +16,12 @@ namespace RPG.Movement {
         void Update()
         {
             UpdateAnimator();
+        }
+
+        public void StartMoveAction(Vector3 destination)
+        {
+            GetComponent<ActionScheduler>().StartAction(this);
+            MoveTo(destination);
         }
 
         public void MoveTo(Vector3 destination)

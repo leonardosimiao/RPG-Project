@@ -10,7 +10,11 @@ namespace RPG.Control
         void Update()
         {
             if (InteractWithCombat()) return;
-            if (InteractWithMovement()) return;
+            if (InteractWithMovement()) 
+            {
+                GetComponent<Fighter>().CancelAttack();
+                return;
+            }
             print("Nothing to do here.");
         }
 
@@ -44,7 +48,7 @@ namespace RPG.Control
                 // Will be true while left mouse button is pressed down.
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().MoveTo(cursor.point);
+                    GetComponent<Mover>().StartMoveAction(cursor.point);
                 }
                 return true;
             }

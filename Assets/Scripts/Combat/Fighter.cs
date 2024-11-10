@@ -1,32 +1,45 @@
 using UnityEngine;
+using RPG.Core;
 using RPG.Movement;
 
 namespace RPG.Combat 
 {   
     public class Fighter : MonoBehaviour
     {
-        [SerializeField] float weaponRange = 2f;
+        [SerializeField] float weaponRange = 3f;
         
         Transform target;
 
         // Update is called once per frame.
         private void Update()
         {
-            bool isInRange = Vector3.Distance(transform.position, target.position) < weaponRange;
+            if (target == null) return;
 
-            if (target != null && !isInRange)
+            if (!IsTargetInWeaponRange())
             {
                 GetComponent<Mover>().MoveTo(target.position);
             }
             else
             {
                 GetComponent<Mover>().Stop();
-                target = null;
+                print("Katchim!");
             }
         }
+        
+        private bool IsTargetInWeaponRange()
+        {
+            return (Vector3.Distance(transform.position, target.position) < weaponRange);
+        }
+
         public void Attack(CombatTarget combatTarget)
         {
+            GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.transform;
+        }
+
+        public void CancelAttack()
+        {
+            target = null;
         }
     }
 }
