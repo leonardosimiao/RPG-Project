@@ -36,10 +36,10 @@ namespace RPG.Control
         private bool InteractWithMovement()
         {
             RaycastHit cursor;
-            // identifies if cursor position is in scene environment
-            bool isPointInEnv = Physics.Raycast(GetMouseRay(), out cursor);
+            // Defines cursor position and identifies if it is inside scene environment bounds.
+            bool isCursorInEnv = Physics.Raycast(GetMouseRay(), out cursor);
 
-            if (isPointInEnv)
+            if (isCursorInEnv)
             {
                 // Will be true while left mouse button is pressed down.
                 if (Input.GetMouseButton(0))
