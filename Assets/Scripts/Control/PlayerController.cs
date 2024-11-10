@@ -10,11 +10,7 @@ namespace RPG.Control
         void Update()
         {
             if (InteractWithCombat()) return;
-            if (InteractWithMovement()) 
-            {
-                GetComponent<Fighter>().CancelAttack();
-                return;
-            }
+            if (InteractWithMovement()) return;
             print("Nothing to do here.");
         }
 

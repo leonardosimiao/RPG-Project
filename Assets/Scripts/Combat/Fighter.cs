@@ -4,7 +4,7 @@ using RPG.Movement;
 
 namespace RPG.Combat 
 {   
-    public class Fighter : MonoBehaviour
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 3f;
         
@@ -21,8 +21,8 @@ namespace RPG.Combat
             }
             else
             {
-                GetComponent<Mover>().Stop();
-                print("Katchim!");
+                GetComponent<Mover>().Cancel();
+                // print("Katchim!");
             }
         }
         
@@ -37,7 +37,7 @@ namespace RPG.Combat
             target = combatTarget.transform;
         }
 
-        public void CancelAttack()
+        public void Cancel()
         {
             target = null;
         }

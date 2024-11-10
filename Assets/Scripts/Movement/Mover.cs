@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using RPG.Core;
 
 namespace RPG.Movement {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         NavMeshAgent navMeshAgent;
 
@@ -30,7 +30,7 @@ namespace RPG.Movement {
             navMeshAgent.isStopped = false;
         }
 
-        public void Stop()
+        public void Cancel()
         {
             navMeshAgent.isStopped = true;
         }
