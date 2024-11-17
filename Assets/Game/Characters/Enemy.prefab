@@ -70,6 +70,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5098583113700472786, guid: d5966133e53a75143983f42368c6f932, type: 3}
+      propertyPath: health
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: -5098583113700472786, guid: d5966133e53a75143983f42368c6f932, type: 3}
+      propertyPath: healthPoints
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1303132713375586977, guid: d5966133e53a75143983f42368c6f932, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -172,4 +180,4 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
