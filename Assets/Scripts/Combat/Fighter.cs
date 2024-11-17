@@ -6,7 +6,7 @@ namespace RPG.Combat
 {   
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 2.5f;
+        [SerializeField] float weaponRange = 1.5f;
         [SerializeField] float attackCoolDown = 1f;
         [SerializeField] float weaponDamage = 5f;
         
