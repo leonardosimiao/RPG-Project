@@ -6,7 +6,7 @@ namespace RPG.Combat
 {   
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 3f;
+        [SerializeField] float weaponRange = 2.5f;
         
         Transform target;
 
@@ -22,13 +22,24 @@ namespace RPG.Combat
             else
             {
                 GetComponent<Mover>().Cancel();
-                // print("Katchim!");
+                AttackBehaviour();
             }
         }
         
         private bool IsTargetInWeaponRange()
         {
             return (Vector3.Distance(transform.position, target.position) < weaponRange);
+        }
+
+        private void AttackBehaviour()
+        {
+            GetComponent<Animator>().SetTrigger("attack");
+        }
+
+        // Animation Event called on Unity, required for attack synchronization.
+        private void Hit()
+        {
+
         }
 
         public void Attack(CombatTarget combatTarget)
