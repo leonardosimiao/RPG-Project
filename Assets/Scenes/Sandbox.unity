@@ -1783,7 +1783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478472058496167356, guid: d5966133e53a75143983f42368c6f932, type: 3}
       propertyPath: weaponRange
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3932754373361780004, guid: d5966133e53a75143983f42368c6f932, type: 3}
       propertyPath: m_Speed

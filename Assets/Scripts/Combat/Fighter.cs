@@ -7,12 +7,15 @@ namespace RPG.Combat
     public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2.5f;
+        [SerializeField] float attackCoolDown = 1f;
         
         Transform target;
+        float timeSinceLastAttack = 0;
 
         // Update is called once per frame.
         private void Update()
         {
+            timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
 
             if (!IsTargetInWeaponRange())
@@ -33,7 +36,11 @@ namespace RPG.Combat
 
         private void AttackBehaviour()
         {
-            GetComponent<Animator>().SetTrigger("attack");
+            if (timeSinceLastAttack > attackCoolDown)
+            {
+                GetComponent<Animator>().SetTrigger("attack");
+                timeSinceLastAttack = 0;
+            }
         }
 
         // Animation Event called on Unity, required for attack synchronization.
