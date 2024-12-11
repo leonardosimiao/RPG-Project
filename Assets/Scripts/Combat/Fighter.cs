@@ -54,6 +54,13 @@ namespace RPG.Combat
             targetHealth.TakeDamage(weaponDamage);
         }
 
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (combatTarget == null) return false;
+            Health healthState = combatTarget.GetComponent<Health>();
+            return healthState.IsAlive();
+        }
+
         public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
