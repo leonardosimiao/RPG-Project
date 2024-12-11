@@ -43,14 +43,27 @@ namespace RPG.Combat
             if (timeSinceLastAttack > attackCoolDown)
             {
                 // This will trigger the Hit() event;
-                GetComponent<Animator>().SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0;
             }
+        }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("stopAttack");
+            GetComponent<Animator>().SetTrigger("attack");
+        }
+
+        private void UntriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("stopAttack");
         }
 
         // Animation Event called on Unity, required for attack synchronization.
         private void Hit()
         {
+            if (targetHealth == null) return;
             targetHealth.TakeDamage(weaponDamage);
         }
 
@@ -70,7 +83,7 @@ namespace RPG.Combat
 
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("stopAttack");
+            UntriggerAttack();
             target = null;
         }
     }
