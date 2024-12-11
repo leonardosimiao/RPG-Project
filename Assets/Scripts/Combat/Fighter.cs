@@ -11,6 +11,7 @@ namespace RPG.Combat
         [SerializeField] float weaponDamage = 5f;
         
         Transform target;
+        Health targetHealth;
         float timeSinceLastAttack = 0;
 
         // Update is called once per frame.
@@ -18,6 +19,7 @@ namespace RPG.Combat
         {
             timeSinceLastAttack += Time.deltaTime;
             if (target == null) return;
+            if (!targetHealth.IsAlive()) return;
 
             if (!IsTargetInWeaponRange())
             {
@@ -48,18 +50,19 @@ namespace RPG.Combat
         // Animation Event called on Unity, required for attack synchronization.
         private void Hit()
         {
-            Health healthComponent = target.GetComponent<Health>();
-            healthComponent.TakeDamage(weaponDamage);
+            targetHealth.TakeDamage(weaponDamage);
         }
 
         public void Attack(CombatTarget combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.transform;
+            targetHealth = combatTarget.GetComponent<Health>();
         }
 
         public void Cancel()
         {
+            GetComponent<Animator>().SetTrigger("stopAttack");
             target = null;
         }
     }

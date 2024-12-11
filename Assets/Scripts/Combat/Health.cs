@@ -7,6 +7,11 @@ namespace RPG.Combat
         [SerializeField] float healthPoints = 100f;
         bool isAlive = true;
 
+        public bool IsAlive()
+        {
+            return isAlive;
+        }
+
         public void TakeDamage(float damage)
         {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
