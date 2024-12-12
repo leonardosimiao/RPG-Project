@@ -43,21 +43,24 @@ namespace RPG.Combat
             if (timeSinceLastAttack > attackCoolDown)
             {
                 // This will trigger the Hit() event;
-                TriggerAttack();
+                TriggerAttack("start");
                 timeSinceLastAttack = 0;
             }
         }
 
-        private void TriggerAttack()
+        //Start or stop attack triggers
+        private void TriggerAttack(string action)
         {
-            GetComponent<Animator>().ResetTrigger("stopAttack");
-            GetComponent<Animator>().SetTrigger("attack");
-        }
-
-        private void UntriggerAttack()
-        {
-            GetComponent<Animator>().ResetTrigger("attack");
-            GetComponent<Animator>().SetTrigger("stopAttack");
+            if (action == "start")
+            {
+                GetComponent<Animator>().ResetTrigger("stopAttack");
+                GetComponent<Animator>().SetTrigger("attack");
+            }
+            else if (action == "stop")
+            {                
+                GetComponent<Animator>().ResetTrigger("attack");
+                GetComponent<Animator>().SetTrigger("stopAttack");
+            }
         }
 
         // Animation Event called on Unity, required for attack synchronization.
@@ -83,7 +86,7 @@ namespace RPG.Combat
 
         public void Cancel()
         {
-            UntriggerAttack();
+            TriggerAttack("stop");
             target = null;
         }
     }
