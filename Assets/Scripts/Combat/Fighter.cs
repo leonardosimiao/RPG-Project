@@ -48,15 +48,15 @@ namespace RPG.Combat
             }
         }
 
-        //Start or stop attack triggers
-        private void TriggerAttack(string action)
+        //Start or stop attack-related triggers
+        private void TriggerAttack(string actionState)
         {
-            if (action == "start")
+            if (actionState == "start")
             {
                 GetComponent<Animator>().ResetTrigger("stopAttack");
                 GetComponent<Animator>().SetTrigger("attack");
             }
-            else if (action == "stop")
+            else if (actionState == "stop")
             {                
                 GetComponent<Animator>().ResetTrigger("attack");
                 GetComponent<Animator>().SetTrigger("stopAttack");
