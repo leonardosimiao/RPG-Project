@@ -82,6 +82,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3932754373361780004, guid: d5966133e53a75143983f42368c6f932, type: 3}
+      propertyPath: m_Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5514533637752571940, guid: d5966133e53a75143983f42368c6f932, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -135,6 +139,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1303132713375586977, guid: d5966133e53a75143983f42368c6f932, type: 3}
       insertIndex: -1
       addedObject: {fileID: -481937892000169861}
+    - targetCorrespondingSourceObject: {fileID: 1303132713375586977, guid: d5966133e53a75143983f42368c6f932, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6002114621321666581}
   m_SourcePrefab: {fileID: 100100000, guid: d5966133e53a75143983f42368c6f932, type: 3}
 --- !u!4 &836404264117781604 stripped
 Transform:
@@ -181,3 +188,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6002114621321666581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127611643770885857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fda2cc2f6b17e84e83172cffa5fac76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 5
