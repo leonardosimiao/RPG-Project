@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -10,18 +11,21 @@ namespace RPG.Control
         [SerializeField] float chaseDistance = 5f;
 
         Fighter fighter;
+        Health health;
         GameObject player;
 
         //Start is called before the first frame update
         void Start()
         {
             fighter = GetComponent<Fighter>();
+            health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (!health.IsAlive()) return;
             if (IsPlayerInChasingDistance() && fighter.CanAttack(player))
             {
                 fighter.Attack(player);
