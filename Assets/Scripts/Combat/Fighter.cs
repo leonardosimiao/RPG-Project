@@ -12,7 +12,7 @@ namespace RPG.Combat
         
         Transform target;
         Health targetHealth;
-        float timeSinceLastAttack = attackCoolDown;
+        float timeSinceLastAttack = 100f;
 
         // Update is called once per frame.
         private void Update()
