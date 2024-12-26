@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Combat;
 using RPG.Core;
+using RPG.Movement;
 
 namespace RPG.Control
 {
@@ -11,15 +12,21 @@ namespace RPG.Control
         [SerializeField] float chaseDistance = 5f;
 
         Fighter fighter;
+        Mover mover;
         Health health;
         GameObject player;
+
+        Vector3 guardPosition;
 
         //Start is called before the first frame update
         void Start()
         {
             fighter = GetComponent<Fighter>();
+            mover = GetComponent<Mover>();
             health = GetComponent<Health>();
             player = GameObject.FindWithTag("Player");
+
+            guardPosition = transform.position;
         }
 
         // Update is called once per frame
@@ -32,7 +39,7 @@ namespace RPG.Control
             }
             else 
             {
-                fighter.Cancel();
+                mover.StartMoveAction(guardPosition);
             }
         }
 
@@ -45,7 +52,7 @@ namespace RPG.Control
 
         private bool IsPlayerInChasingDistance()
         {
-            return (DistanceToPlayer() < chaseDistance);
+            return DistanceToPlayer() < chaseDistance;
         }
 
         private float DistanceToPlayer()
