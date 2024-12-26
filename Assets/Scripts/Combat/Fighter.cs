@@ -12,7 +12,7 @@ namespace RPG.Combat
         
         Transform target;
         Health targetHealth;
-        float timeSinceLastAttack = 100f;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         // Update is called once per frame.
         private void Update()

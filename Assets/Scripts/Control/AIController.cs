@@ -10,6 +10,7 @@ namespace RPG.Control
     public class AIController : MonoBehaviour
     {
         [SerializeField] float chaseDistance = 5f;
+        [SerializeField] float suspicionDuration = 5f;
 
         Fighter fighter;
         Mover mover;
@@ -17,7 +18,15 @@ namespace RPG.Control
         GameObject player;
 
         Vector3 guardPosition;
-
+        float timeSinceLastSuspicion = Mathf.Infinity;
+        
+                // Called by Unity Editor
+        private void OnDrawGizmosSelected() 
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
+        }
+        
         //Start is called before the first frame update
         void Start()
         {
@@ -35,19 +44,33 @@ namespace RPG.Control
             if (!health.IsAlive()) return;
             if (IsPlayerInChasingDistance() && fighter.CanAttack(player))
             {
-                fighter.Attack(player);
+                timeSinceLastSuspicion = 0;
+                AttackBehaviour();
             }
-            else 
+            else if (timeSinceLastSuspicion < suspicionDuration)
             {
-                mover.StartMoveAction(guardPosition);
+                SuspicionBehaviour();
+                timeSinceLastSuspicion += Time.deltaTime;
+            }
+            else
+            {
+                GuardBehaviour();
             }
         }
 
-        // Called by Unity Editor
-        private void OnDrawGizmosSelected() 
+        private void GuardBehaviour()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, chaseDistance);
+            mover.StartMoveAction(guardPosition);
+        }
+
+        private void SuspicionBehaviour()
+        {
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        private void AttackBehaviour()
+        {
+            fighter.Attack(player);
         }
 
         private bool IsPlayerInChasingDistance()
